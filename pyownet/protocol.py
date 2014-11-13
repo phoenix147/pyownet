@@ -44,6 +44,7 @@ from __future__ import print_function
 
 import struct
 import socket
+from sys import version_info
 
 _MSG_WAITALL = socket.MSG_WAITALL
 
@@ -113,8 +114,12 @@ _MAX_PAYLOAD = 65536
 
 def str2bytez(s):
     "transform string to zero-terminated bytes"
-    if not isinstance(s, basestring):
-        raise TypeError()
+    if version_info < (3, 0):
+        if not isinstance(s, basestring):
+            raise TypeError()
+    else:
+        if not isinstance(s, str):
+            raise TypeError()
     return s.encode('ascii') + b'\x00'
 
 def bytes2str(b):
