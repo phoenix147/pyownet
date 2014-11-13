@@ -206,7 +206,7 @@ class _addfieldprops(type):
         return super(_addfieldprops, mcs).__new__(mcs, name, bases, namespace)
 
 
-class _Header(bytes):
+class _Header(bytes, metaclass = _addfieldprops):
     """abstract header class, obtained as a 'bytes' subclass
 
     should not be instantiated directly"""
